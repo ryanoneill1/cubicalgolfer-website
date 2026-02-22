@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cubical Golfer – Test Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #0b1924;
+      --bg-alt: #0f2535;
+      --accent: #20c997;
+      --accent-soft: rgba(32, 201, 151, 0.1);
+      --text: #f5f7fb;
+      --muted: #a8b3c7;
+      --border: #223447;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --radius: 12px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: radial-gradient(circle at top left, #163954, #050b11 55%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(5, 11, 17, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 20%, #32f5c8, #12876b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #32f5c8, #0fb68a);
+      color: #041116;
+      box-shadow: 0 14px 30px rgba(50, 245, 200, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(50, 245, 200, 0.55);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    main {
+      padding: 32px 0 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+      padding-top: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 9px 5px 5px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(13,27,39,0.9);
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 14px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 480px;
+      margin-bottom: 20px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-side {
+      position: relative;
+    }
+
+    .glass-card {
+      background: radial-gradient(circle at top left, rgba(32, 201, 151, 0.15), rgba(5, 12, 20, 0.96));
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+    }
+
+    .glass-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .glass-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(3, 23, 35, 0.95);
+      color: var(--accent);
+      font-size: 11px;
+      border: 1px solid rgba(32,201,151,0.5);
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .metric-row strong {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .metric-chip {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(11, 29, 43, 0.9);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .metric-chip span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+    }
+
+    .section {
+      margin-top: 50px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 14px 14px 16px;
+      border-radius: 16px;
+      background: rgba(5,14,22,0.95);
+      border: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card-tagline {
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    .callout {
+      padding: 16px 16px 18px;
+      border-radius: 16px;
+      background: rgba(4,15,25,0.96);
+      border: 1px dashed rgba(255,255,255,0.18);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .list {
+      padding-left: 18px;
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .list li { margin-bottom: 4px; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill-small {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(11, 27, 40, 0.9);
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .email-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .email-box input {
+      flex: 1 1 180px;
+      min-width: 0;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(4, 12, 18, 0.9);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .email-box input::placeholder {
+      color: rgba(168,179,199,0.8);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      margin-top: 50px;
+      padding-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .hero,
+      .split {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-side {
+        order: -1;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .wrap {
+        padding-bottom: 40px;
+      }
+      footer {
+        margin-top: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">
+      <div class="logo-mark">C</div>
+      <span>Cubical Golfer</span>
+    </a>
+    <div class="nav-links">
+      <a href="#start-here">Start here</a>
+      <a href="#golfn-feature">GolfN</a>
+      <a href="#gear-tools">Gear & tools</a>
+      <a href="#blog">Blog</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="badge">
+          <div class="badge-pill">⛳</div>
+          WEEKEND GOLF, FULL‑TIME JOB
+        </div>
+        <h1>Golf more, spend less — even with a 9–5.</h1>
+        <p class="hero-sub">
+          Cubical Golfer is for office golfers who want to squeeze more golf, rewards, and fun out of limited tee times using smart apps, deals, and gear.
+        </p>
+        <div class="hero-ctas">
+          <a href="#email" class="btn btn-primary">Get the Cubical Golfer starter kit</a>
+          <a href="#golfn-feature" class="btn btn-ghost">Get paid to play with GolfN →</a>
+        </div>
+        <p class="hero-note">
+          Some links are affiliate links. They support this site at no extra cost to you.
+        </p>
+      </div>
+
+      <div class="hero-side">
+        <div class="glass-card">
+          <div class="glass-header">
+            <div class="glass-title">Sample weekend breakdown</div>
+            <span class="pill">Cubical golfer mode</span>
+          </div>
+          <div class="metric-row">
+            <span>Rounds per month</span>
+            <strong>3–6</strong>
+          </div>
+          <div class="metric-row">
+            <span>Work hours</span>
+            <strong>9–5 (…ish)</strong>
+          </div>
+          <div class="metric-row">
+            <span>Goal</span>
+            <strong>More golf, less waste</strong>
+          </div>
+          <div class="metric-chip">
+            Stack <span>apps, rewards, and routines</span> to make every round count.
+          </div>
+          <div class="tag-row">
+            <span class="tag">After‑work nines</span>
+            <span class="tag">Early‑morning tee times</span>
+            <span class="tag">Family‑friendly trips</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- START HERE -->
+    <section id="start-here" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Start here</div>
+          <h2 class="section-title">Built for office golfers</h2>
+        </div>
+      </div>
+      <p class="section-sub">
+        If you work at a desk but think about golf all day, this is your spot. Here’s how Cubical Golfer can help you get more out of your limited tee times.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">Apps & rewards</div>
+          <p class="card-body">
+            Tools that turn your rounds into points, perks, and real‑world golf gear instead of just scorecards.
+          </p>
+          <div class="card-tagline">GolfN is step one.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Time‑smart routines</div>
+          <p class="card-body">
+            Simple practice and play frameworks that fit around your calendar, not the other way around.
+          </p>
+          <div class="card-tagline">No “quit your job” advice.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">No‑nonsense gear picks</div>
+          <p class="card-body">
+            Recommended gear, launch monitors, and training aids that feel premium without wrecking your budget.
+          </p>
+          <div class="card-tagline">Tested for real use.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED: GOLFN -->
+    <section class="section" id="golfn-feature">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Featured app</div>
+          <h2 class="section-title">GolfN: get rewarded for every round</h2>
+        </div>
+      </div>
+      <p class="section-sub">
+        GolfN is a free digital caddie and rewards app that lets you track rounds, improve your game, and earn points you can redeem for golf equipment, travel, and exclusive experiences.
+      </p>
+
+      <div class="split">
+        <div>
+          <div class="card">
+            <div class="card-title">Why it’s perfect for cubical golfers</div>
+            <ul class="list">
+              <li>Every round you already play earns points toward real gear and trips.</li>
+              <li>GPS, 2D/3D maps, and recommendations are included for free.</li>
+              <li>Use it as lightly or heavily as you want — the more you engage, the more you earn.</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Start with GolfN</a>
+            <p class="hero-note" style="margin-top:8px;">
+              Affiliate link here. You get the same app; I may earn a small commission.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <strong>Quick start plan:</strong>
+            <ol class="list">
+              <li>Download GolfN and set up your profile.</li>
+              <li>Add your bag and home course.</li>
+              <li>Log your next round and check your first points and badges.</li>
+            </ol>
+            <div class="pill-row">
+              <span class="pill-small">40,000+ courses supported</span>
+              <span class="pill-small">Score & stats tracking</span>
+              <span class="pill-small">Redeem points for gear</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEAR & TOOLS -->
+    <section id="gear-tools" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Gear & tools</div>
+          <h2 class="section-title">Stuff that actually makes golf easier</h2>
+        </div>
+      </div>
+      <p class="section-sub">
+        As this site grows, this section will track the apps, launch monitors, training aids, and budget‑friendly gear that earn a permanent spot in the Cubical Golfer rotation.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">GolfN (start here)</div>
+          <p class="card-body">
+            Free rewards‑driven digital caddie that pays you in points for every round you play and track.
+          </p>
+          <a href="#golfn-feature" class="btn btn-ghost">See why I use GolfN →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Coming soon</div>
+          <p class="card-body">
+            Tee‑time apps, stat trackers, and smart practice tools that fit a busy schedule.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">My setup</div>
+          <p class="card-body">
+            What’s currently in my bag and home/office practice setup (launch monitor, putting mat, net).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">On the blog</div>
+          <h2 class="section-title">Guides for the cubical golfer</h2>
+        </div>
+      </div>
+      <p class="section-sub">
+        Short, tactical posts you can read on a coffee break and apply by the time you get to the first tee this weekend.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">How I stack rewards to play more golf</div>
+          <p class="card-body">
+            A simple framework for combining apps like GolfN with everyday spending to fund more golf.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">The 9–5 golfer’s weekly routine</div>
+          <p class="card-body">
+            A sample week that balances work, family, practice, and at least one proper round.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">5 golf apps every office golfer should try</div>
+          <p class="card-body">
+            A curated list of apps that help with planning, practice, and on‑course decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMAIL -->
+    <section id="email" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Email list</div>
+          <h2 class="section-title">1 new golf hack every Friday</h2>
+        </div>
+      </div>
+      <p class="section-sub">
+        Join the Cubical Golfer list and get one practical tip each week to help you play more, spend smarter, and enjoy the game — even on a packed calendar.
+      </p>
+      <form class="email-box">
+        <input type="email" placeholder="Enter your email to get the starter kit" required>
+        <button type="submit" class="btn btn-primary">Join free</button>
+      </form>
+      <p class="hero-note" style="margin-top:8px;">
+        No spam. Just one email with apps, deals, and ideas built for cubical golfers.
+      </p>
+    </section>
+
+    <footer>
+      <div class="footer-row">
+        <span>© <span id="year"></span> Cubical Golfer. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="#">X / Twitter</a>
+          <a href="#golfn-feature">GolfN section</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
